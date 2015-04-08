@@ -38,7 +38,13 @@ public:
 class PTreePrint: public PTree {};
 class PTreeSet: public PTree {};
 class PTreePlus: public PTree {};
-class PTreeMinus: public PTree{}; 
+class PTreeMinus: public PTree{};
+class PTreeStar: public PTree {};
+class PTreeSlash: public PTree {};
+class PTreeID: public PTree {};
+class PTreeINT: public PTree {};
+class pTreeString: public PTree {};
+
 
 //function for each PTree
 //first 2 done for us
