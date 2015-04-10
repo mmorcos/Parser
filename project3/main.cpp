@@ -35,15 +35,36 @@ class PTreeStmtList : public PTree { //constructs itself by constructing its par
 public:
     PTreeStmtList(PTree *s1, PTree *s2 = 0) : PTree(s1, s2) {}
 };
-class PTreePrint: public PTree {};
-class PTreeSet: public PTree {};
-class PTreePlus: public PTree {};
-class PTreeMinus: public PTree{};
-class PTreeStar: public PTree {};
-class PTreeSlash: public PTree {};
-class PTreeID: public PTree {};
-class PTreeINT: public PTree {};
-class pTreeString: public PTree {};
+
+class PTreePrint: public PTree {
+    PTreePrint(PTree *print): PTree(print) {}
+};
+class PTreeSet: public PTree {
+    PTreeSet (PTree *set): PTree(set) {}
+
+};
+class PTreePlus: public PTree {
+    PTreePlus (PTree *plus) : PTree (plus){}
+};
+class PTreeMinus: public PTree{
+    PTreeMinus (PTree *minus) : PTree (minus){}
+};
+class PTreeStar: public PTree {
+    PTreeStar(PTree *star) : PTree (star){}
+
+};
+class PTreeSlash: public PTree {
+    PTreeSlash(PTree *slash): PTree(slash) {}
+};
+class PTreeID: public PTree {
+    PTreeID(PTree *id): PTree(id) {}
+};
+class PTreeINT: public PTree {
+    PTreeINT(PTree *integer): PTree(integer) {}
+};
+class PTreeString: public PTree {
+    PTreeString (PTree *myString): PTree(myString) {}
+};
 
 
 //function for each PTree
@@ -70,18 +91,20 @@ PTree *StmtList(istream *br)
     stmt = Stmt(br); //find statement
     
     if( stmt ) //if it's there return a statement list
+        return new PTreeStmtList( stmt, StmtList(br));
         return new PTreeStmtList( stmt, StmtList(br) );
     return 0;
 }
 
 PTree *Stmt(istream *br)
 {
-    PTree * expr;
-    expr = Expr (br);
-    if ( expr)
-    {
-    //    string::find(ID);
-    }
+    PTree * print;
+    PTree * set;
+    print = Expr(br);
+    set = Expr (br);
+    
+    if (print)
+        return new PTreePrint( print, Stmt(br));
     
     return 0;
 }
