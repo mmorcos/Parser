@@ -36,6 +36,11 @@ public:
     PTreeStmtList(PTree *s1, PTree *s2 = 0) : PTree(s1, s2) {}
 };
 
+class PTreePlus : public PTree { //constructs itself by constructing its parents
+public:
+    PTreePlus(PTree *plus) : PTree(plus) {}
+};
+
 class PTreePrint: public PTree {
     PTreePrint(PTree *print): PTree(print) {}
 };
@@ -43,9 +48,7 @@ class PTreeSet: public PTree {
     PTreeSet (PTree *set): PTree(set) {}
 
 };
-class PTreePlus: public PTree {
-    PTreePlus (PTree *plus) : PTree (plus){}
-};
+
 class PTreeMinus: public PTree{
     PTreeMinus (PTree *minus) : PTree (minus){}
 };
@@ -103,9 +106,9 @@ PTree *Stmt(istream *br)
     print = Expr(br);
     set = Expr (br);
     
-    if (print)
-        return new PTreePrint( print, Stmt(br));
-    
+    if (print){
+      return new PTreePlus(print, Stmt(br));
+    }
     return 0;
 }
 
